@@ -1,0 +1,138 @@
+digraph G {
+"Foothills" [label="Foothills | tablet"]
+"Foothills" -> "Dark cave" [label = "doorway"]
+"Foothills" -> "Foothills2" [label = "south"]
+"Foothills2" -> "Foothills" [label = "north"]
+"Dark cave" -> "Dark cave2" [label = "north"]
+"Dark cave" -> "Foothills" [label = "south"]
+"Dark cave2" -> "Dark cave" [label = "south"]
+"Dark cave2" -> "Dark cave3" [label = "north"]
+"Dark cave3" -> "Dark cave2" [label = "south"]
+"Dark cave3" -> "Rope bridge" [label = "bridge"]
+"Rope bridge" -> "Dark cave3" [label = "back"]
+"Rope bridge" -> "Falling" [label = "continue"]
+"Falling" -> "Moss cavern" [label = "down"]
+"Moss cavern" -> "Moss cavern2" [label = "west"]
+"Moss cavern" -> "Moss cavern3" [label = "east"]
+"Moss cavern2" -> "Moss cavern" [label = "east"]
+"Moss cavern2" -> "Passage" [label = "passage"]
+"Moss cavern3" -> "Moss cavern" [label = "west"]
+"Moss cavern3" [label="Moss cavern3 | empty lantern"]
+"Passage" -> "Moss cavern2" [label = "cavern"]
+"Passage" -> "T1" [label = "ladder"]
+"Passage" -> "Passage2" [label = "darkness"]
+"Passage2" -> "Passage" [label = "back"]
+"T1" -> "Passage" [label = "ladder"]
+
+// 1: ladder
+
+"T1" -> "T2" [label = "north"]
+"T1" -> "T3" [label = "south"]
+"T1" -> "T4" [label = "east"]
+"T1" -> "T5" [label = "west"]
+
+// 2: TMLPAA, NSW
+
+"T2" -> "T3" [label = "north"]
+"T2" -> "T1" [label = "south"]
+"T2" -> "T2" [label = "west"]
+
+// 3: MLTPAA, NSE
+
+"T3" -> "T1" [label = "north"]
+"T3" -> "T2" [label = "south"]
+"T3" -> "T3" [label = "east"]
+
+// 4: MALPAT, TPTTELVD, YTYHAG
+
+"T4" -> "T7" [label = "north"]
+"T4" -> "T4" [label = "south"]
+"T4" -> "T1" [label = "west"]
+"T4" -> "T9" [label = "east"]
+
+// 5: LMTPAA, NSE
+
+"T5" -> "T5" [label = "north"]
+"T5" -> "T6" [label = "south"]
+"T5" -> "T1" [label = "east"]
+
+// 6: TALPAM, TEPAVD, YFLTBEBAG, NSWE
+
+"T6" -> "T8" [label = "north"]
+"T6" -> "T2" [label = "south"]
+"T6" -> "T3" [label = "west"]
+"T6" -> "T9" [label = "east"]
+
+// 7: MATPAL, NES
+
+"T7" -> "T3" [label = "north"]
+"T7" -> "T2" [label = "east"]
+"T7" -> "T7" [label = "south"]
+
+// 8: MTLPAA, W
+
+"T8" [label="T8 | can"]
+"T8" -> "T1" [label = "west"]
+
+// 9: TMLPAA, NS
+
+"T9" -> "T3" [label = "north"]
+"T9" -> "T2" [label = "south"]
+
+//////////////////
+
+"Passage2" -> "Dark" [label = "continue"]
+"Passage2" -> "Passage" [label = "back"]
+"Dark" -> "Dark2" [label = "west"]
+"Dark" -> "Passage2" [label = "east"]
+
+"Dark2" -> "Dark" [label = "east"]
+"Dark2" -> "Dark3" [label = "west"]
+
+"Dark3" -> "Dark2" [label = "east"]
+"Dark3" -> "Dark4" [label = "west"]
+
+"Dark4" -> "Dark3" [label = "east"]
+"Dark4" -> "Ruins" [label = "west"]
+
+"Ruins" -> "Dark4" [label = "east"]
+"Ruins" -> "Ruins2" [label = "north"]
+
+"Ruins2" [label="Ruins2 | red coin (2)"]
+"Ruins2" -> "Ruins3" [label = "north"]
+"Ruins2" -> "Ruins" [label = "south"]
+
+"Ruins3" -> "Ruins8" [label = "north"]
+"Ruins3" -> "Ruins2" [label = "south"]
+"Ruins3" -> "Ruins6" [label = "east"]
+"Ruins3" -> "Ruins4" [label = "west"]
+
+"Ruins4" [label="Ruins4 | blue coin (9)"]
+"Ruins4" -> "Ruins5" [label = "up"]
+"Ruins4" -> "Ruins3" [label = "east"]
+
+"Ruins5" [label="Ruins5 | shiny coin (5)"]
+"Ruins5" -> "Ruins4" [label = "down"]
+
+"Ruins6" [label="Ruins6 | concave coin (7)"]
+"Ruins6" -> "Ruins7" [label = "down"]
+"Ruins6" -> "Ruins3" [label = "west"]
+
+"Ruins7" [label="Ruins7 | corroded coin (3)"]
+"Ruins7" -> "Ruins6" [label = "up"]
+
+// 9,2,5,7,3
+
+"Ruins8" [label="Ruins8 | teleporter"]
+"Ruins8" -> "Synacor" [label = "use teleporter"]
+"Ruins8" -> "?" [label = "south"]
+
+"Synacor" [label="Synacor | strange book"]
+"Synacor" -> "Synacor2" [label = "outside"]
+"Synacor2" -> "Synacor" [label = "inside"]
+
+// strange book: register 8 has value 0 by default, but there is a value that teleports you to some other location... well, we have 2^15 or 2^16 values, right? it was saying something about confirmation algorithm and bypassing it... is it some kind of inefficient loop, or is it the "you shalt not have the values > 2^15+8 in your VM"?
+
+"?" [fontcolor=red]
+
+}
